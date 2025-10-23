@@ -6,10 +6,10 @@ It does not intend to prove a solution to the ecommerce business but to showcase
 
 ## Services
 
-- ***UserService*** allows customers to register an account needed to create orders.
-- ***ProductService*** stores every detail about the product catalog.
-- ***OrderService*** by communicating with the rest of services validates the request for an order.
-- ***PaymentService*** processes an order's payment as a background service.
+- [UserService](https://github.com/sebagb/Ecommerce.UserService) allows customers to register an account needed to create orders.
+- [ProductService](https://github.com/sebagb/Ecommerce.ProductService) stores every detail about the product catalog.
+- [OrderService](https://github.com/sebagb/Ecommerce.OrderService) by communicating with the rest of services validates the request for an order.
+- [PaymentService](https://github.com/sebagb/Ecommerce.PaymentService) processes an order's payment as a background service.
 
 Each service implements their own repository and stores the data on databases accessible only by the responsible service.
 
