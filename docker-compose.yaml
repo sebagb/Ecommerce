@@ -1,0 +1,96 @@
+services:
+
+    postgres-user-service:
+      image: postgres:17.6-alpine3.22
+      container_name: postgres-user-service
+      restart: no
+      # set shared memory limit
+      shm_size: 128mb
+      environment:
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: changepassword
+        POSTGRES_DB: user_service
+      ports:
+        - '5432:5432'
+
+    mongo-product-service:
+      image: mongo:8.0.15-noble
+      container_name: mongo-product-service
+      restart: no
+      ports:
+        - 27017:27017  
+      environment:
+        MONGO_INITDB_ROOT_USERNAME: root
+        MONGO_INITDB_ROOT_PASSWORD: root123
+
+    mongo-express:
+      image: mongo-express:1.0.2-20-alpine3.19
+      container_name: mongo-express
+      restart: no
+      ports:
+        - 8081:8081
+      environment:
+        ME_CONFIG_MONGODB_URL: mongodb://root:root123@mongo-product-service:27017
+        ME_CONFIG_BASICAUTH_ENABLED: true
+        ME_CONFIG_BASICAUTH_USERNAME: mongoexpressuser
+        ME_CONFIG_BASICAUTH_PASSWORD: mongoexpresspass
+
+    mysql-order-service:
+      image: mysql:8.0.43
+      container_name: mysql-order-service
+      restart: no
+      ports:
+      - 3310:3306
+      environment:
+        MYSQL_DATABASE: OrderService
+        MYSQL_ROOT_PASSWORD: changetherootpassword
+        MYSQL_USER: tempuser
+        MYSQL_PASSWORD: changethepassword
+
+    rabbitmq:
+      image: rabbitmq:management-alpine
+      container_name: rabbitmq
+      restart: no
+      ports:
+      - 5672:5672
+      - 15672:15672
+      environment:
+        RABBITMQ_DEFAULT_USER: guest
+        RABBITMQ_DEFAULT_PASS: guest
+
+    user-service:
+      build: ./UserService/
+      container_name: user-service
+      ports:
+        - "5030:5030"
+      environment:
+        - ASPNETCORE_URLS=http://+:5030
+      depends_on:
+        - postgres-user-service
+
+    product-service:
+      build: ./ProductService/
+      container_name: product-service
+      ports:
+        - "5104:5104"
+      environment:
+        - ASPNETCORE_URLS=http://+:5104
+      depends_on:
+        - mongo-product-service
+
+    order-service:
+      build: .
+      container_name: order-service
+      ports:
+        - "5018:5018"
+      environment:
+        - ASPNETCORE_URLS=http://+:5018
+      depends_on:
+        - mysql-order-service
+        - rabbitmq
+
+    payment-service:
+      build: ./PaymentService/
+      container_name: payment-service
+      depends_on:
+        - rabbitmq
