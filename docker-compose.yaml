@@ -59,7 +59,7 @@ services:
         RABBITMQ_DEFAULT_PASS: guest
 
     user-service:
-      build: ./UserService/
+      build: ./Ecommerce.UserService/
       container_name: user-service
       ports:
         - "5030:5030"
