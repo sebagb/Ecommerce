@@ -59,8 +59,10 @@ The dockerfile at the root of the repository is needed for the *Orders Service* 
 ## Getting up and running
 
 1) `git clone https://github.com/sebagb/Ecommerce.git`
-2) `docker compose up -d` at the root directory
-3) `dotnet tool install --global dotnet-ef`
+2) `docker compose up -d` from the root directory
+3) From the root directory run either one depending on your OS
+	- `./UserService/UserService.Application/efbundle`
+	- `UserService\UserService.Application\efbundle.exe`
 4) `cd UserService/UserService.Application/`
 5) `dotnet ef database update`
 6) Dotnet services might not run from the start if a dependency wasn't ready on time. Check container logs and restart if needed.
@@ -99,12 +101,12 @@ The dockerfile at the root of the repository is needed for the *Orders Service* 
 4) `GET http://localhost:5018/orders/{orderId}`
 Payment will be `Pending` before the payment service process it and it will be either `Failed` or `Succeeded` once it does.
 
-5 `GET http://localhost:5104/products/{productId}`
+5) `GET http://localhost:5104/products/{productId}`
 Product stock will be reduced by order quantity while order is `Pending` and it will be restocked if payment fails.
 
 ## (A few) Possible improvements:
-- [ ] Automate UserService database update `dotnet ef database update`
+- [x] Automate UserService database update `dotnet ef database update`
 - [ ] Add health checks to the services ensuring restart when dependencies were not ready in time.
 - [ ] Constrain schemes to provide just the needed data.
-- [ ] Provide detailed error messages during error `500 Internal Server Error`
+- [x] Provide detailed error messages during CreateOrder error `500 Internal Server Error`
 - [ ] Prove functionality with unit tests
