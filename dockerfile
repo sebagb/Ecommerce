@@ -6,7 +6,7 @@ COPY OrderService/OrderService.Api/*.csproj ./OrderService/OrderService.Api/
 COPY OrderService/OrderService.Application/*.csproj ./OrderService/OrderService.Application/
 COPY OrderService/OrderService.Contract/*.csproj ./OrderService/OrderService.Contract/
 
-COPY Ecommerce.UserService/ ./UserService/
+COPY UserService/ ./UserService/
 COPY ProductService/ ./ProductService/
 
 RUN dotnet restore "OrderService/OrderService.Api/OrderService.Api.csproj"
