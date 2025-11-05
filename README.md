@@ -58,9 +58,10 @@ The dockerfile at the root of the repository is needed for the *Orders Service* 
 
 ## Getting up and running
 
-1) `git clone https://github.com/sebagb/Ecommerce.git`
+1) `git clone --recurse-submodules -j8 https://github.com/sebagb/Ecommerce`
+	- If you already clone without submodules run `git submodule update --init --recursive`
 2) `docker compose up -d` from the root directory
-3) From the root directory run either one depending on your OS
+3) From the root directory run one command depending on your OS to apply EF migrations
 	- `./UserService/UserService.Application/efbundle`
 	- `UserService\UserService.Application\efbundle.exe`
 4) Dotnet services might not run from the start if a dependency wasn't ready on time. Check container logs and restart if needed.
