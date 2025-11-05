@@ -7,3 +7,6 @@
 [submodule "ProductService"]
 	path = ProductService
 	url = https://github.com/sebagb/Ecommerce.ProductService
+[submodule "PaymentService"]
+	path = PaymentService
+	url = https://github.com/sebagb/Ecommerce.PaymentService
