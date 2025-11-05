@@ -64,7 +64,6 @@ The dockerfile at the root of the repository is needed for the *Orders Service* 
 3) From the root directory run one command depending on your OS to apply EF migrations
 	- `./UserService/UserService.Application/efbundle`
 	- `UserService\UserService.Application\efbundle.exe`
-4) Dotnet services might not run from the start if a dependency wasn't ready on time. Check container logs and restart if needed.
 
 ## A sample test flow
 1) `POST http://localhost:5030/users/`
@@ -102,10 +101,3 @@ Payment will be `Pending` before the payment service process it and it will be e
 
 5) `GET http://localhost:5104/products/{productId}`
 Product stock will be reduced by order quantity while order is `Pending` and it will be restocked if payment fails.
-
-## (A few) Possible improvements:
-- [x] Automate UserService database update `dotnet ef database update`
-- [ ] Add health checks to the services ensuring restart when dependencies were not ready in time.
-- [ ] Constrain schemes to provide just the needed data.
-- [x] Provide detailed error messages during CreateOrder error `500 Internal Server Error`
-- [ ] Prove functionality with unit tests
