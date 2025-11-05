@@ -63,9 +63,7 @@ The dockerfile at the root of the repository is needed for the *Orders Service* 
 3) From the root directory run either one depending on your OS
 	- `./UserService/UserService.Application/efbundle`
 	- `UserService\UserService.Application\efbundle.exe`
-4) `cd UserService/UserService.Application/`
-5) `dotnet ef database update`
-6) Dotnet services might not run from the start if a dependency wasn't ready on time. Check container logs and restart if needed.
+4) Dotnet services might not run from the start if a dependency wasn't ready on time. Check container logs and restart if needed.
 
 ## A sample test flow
 1) `POST http://localhost:5030/users/`
