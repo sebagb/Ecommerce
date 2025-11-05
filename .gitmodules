@@ -4,3 +4,6 @@
 [submodule "Ecommerce.OrderService"]
 	path = Ecommerce.OrderService
 	url = https://github.com/sebagb/Ecommerce.OrderService
+[submodule "UserService"]
+	path = UserService
+	url = https://github.com/sebagb/Ecommerce.UserService
